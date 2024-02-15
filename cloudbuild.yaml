@@ -1,0 +1,28 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/udemy-gcp-mlops-413015/bank-campaign-model/bank-campaign-model', '.']
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'us-central1-docker.pkg.dev/udemy-gcp-mlops-413015/bank-campaign-model/bank-campaign-model']
+
+# Run tests if necessary:
+# - name: 'us-central1-docker.pkg.dev/udemy-gcp-mlops-413015/bank-campaign-model/bank-campaign-model'
+#  entrypoint: 'bash'
+#  args:
+#   - '-c'
+#   - |
+#      python -m pytest
+
+- name: 'gcr.io/cloud-builders/git'
+  args: ['clone', 'https://github.com/amir-rafieian/bank-campaign-model.git']
+
+- name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp', 'model-training-repo/bank_campaign_model_training.py', 'gs://us-central1-mlops-airflow-b4d50bb7-bucket/dags']
+
+images:
+- 'us-central1-docker.pkg.dev/udemy-gcp-mlops-413015/bank-campaign-model/bank-campaign-model'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+
