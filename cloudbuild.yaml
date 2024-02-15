@@ -17,7 +17,7 @@ steps:
   args: ['clone', 'https://github.com/amir-rafieian/bank-campaign-model.git']
 
 - name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp', 'model-training-repo/bank_campaign_model_training.py', 'gs://us-central1-mlops-airflow-b4d50bb7-bucket/dags']
+  args: ['cp', 'bank-campaign-model/bank_campaign_model_training.py', 'gs://us-central1-mlops-airflow-b4d50bb7-bucket/dags']
 
 images:
 - 'us-central1-docker.pkg.dev/udemy-gcp-mlops-413015/bank-campaign-model/bank-campaign-model'
